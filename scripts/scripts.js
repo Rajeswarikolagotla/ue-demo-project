@@ -1,3 +1,10 @@
+// Load Universal Editor on .aem.page (preview) and localhost only if
+(window.location.hostname.endsWith('.aem.page') || window.location.hostname === 'localhost') 
+{
+const script = document.createElement('script'); script.src = '/universal-editor-cors.js';
+document.head.appendChild(script); }
+
+
 import {
   loadHeader,
   loadFooter,
