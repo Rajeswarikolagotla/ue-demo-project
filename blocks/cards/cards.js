@@ -29,7 +29,8 @@ export default function decorate(block) {
         // --- STEP 11: Instrument Image Field ---
         const img = div.querySelector('img');
         if (img) {
-          img.setAttribute('data-aue-prop', 'image'); // Matches 'image' in component-models.json
+          // Matches 'image' name in component-models.json
+          img.setAttribute('data-aue-prop', 'image'); 
           img.setAttribute('data-aue-type', 'reference');
           img.setAttribute('data-aue-label', 'Card Image');
         }
@@ -37,7 +38,9 @@ export default function decorate(block) {
         div.className = 'cards-card-body';
         
         // --- STEP 11: Instrument Text Field ---
-        div.setAttribute('data-aue-prop', 'text'); // Matches 'text' in component-models.json
+        // CRITICAL FIX: Ensure this matches the 'name' field in component-models.json
+        // In your uploaded component-models.json, the field is named 'text'
+        div.setAttribute('data-aue-prop', 'text'); 
         div.setAttribute('data-aue-type', 'richtext');
         div.setAttribute('data-aue-label', 'Card Text');
       }
