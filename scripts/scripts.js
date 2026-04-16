@@ -1,10 +1,3 @@
-// Load Universal Editor on .aem.page (preview) and localhost only if
-(window.location.hostname.endsWith('.aem.page') || window.location.hostname === 'localhost') 
-{
-const script = document.createElement('script'); script.src = '/universal-editor-cors.js';
-document.head.appendChild(script); }
-
-
 import {
   loadHeader,
   loadFooter,
@@ -18,6 +11,13 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+
+// Load Universal Editor on .aem.page (preview) and localhost
+if (window.location.hostname.endsWith('.aem.page') || window.location.hostname === 'localhost') {
+  const script = document.createElement('script');
+  script.src = '/universal-editor-cors.js';
+  document.head.appendChild(script);
+}
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -57,7 +57,7 @@ export function moveInstrumentation(from, to) {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  await loadCSS('${window.hlx.codeBasePath}/styles/fonts.css');
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
@@ -132,7 +132,7 @@ async function loadLazy(doc) {
 
   loadFooter(doc.querySelector('footer'));
 
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  loadCSS('${window.hlx.codeBasePath}/styles/lazy-styles.css');
   loadFonts();
 }
 
